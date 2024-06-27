@@ -1,0 +1,37 @@
+---
+import { type Message } from 'db/schema';
+
+type Props = {
+  message: Message;
+  userId: string;
+};
+
+const { message, userId } = Astro.props;
+const isWrittenByUser = userId === message.createdBy;
+---
+
+<div
+  class:list={[
+    'flex h-fit w-4/5 flex-col gap-2 rounded p-4 sm:w-2/3',
+    isWrittenByUser
+      ? 'justify-self-end bg-slate-200'
+      : 'justify-self-start border border-gray-300',
+  ]}
+>
+  <span class="text-slate-700">
+    <span class="font-bold">{isWrittenByUser ? 'You' : 'Them'}</span>
+    {' - '}
+    <span class="text-nowrap text-sm italic">
+      {
+        new Date(message.createdAt).toLocaleString('en-US', {
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          month: 'numeric',
+          year: 'numeric',
+        })
+      }
+    </span>
+  </span>
+  {message.content}
+</div>
