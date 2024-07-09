@@ -9,7 +9,6 @@ export default defineConfig({
     mode: 'standalone',
   }),
   integrations: [tailwind()],
-  experimental: {
-    actions: true,
-  },
+  security: { checkOrigin: true },
+  experimental: { actions: true },
 });

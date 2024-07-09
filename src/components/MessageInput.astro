@@ -29,7 +29,6 @@ const { userId } = Astro.props;
   import { proxy } from 'valtio/vanilla';
   import { subscribeKey } from 'valtio/utils';
   import { actions, isInputError } from 'astro:actions';
-  import { navigate } from 'astro:transitions/client';
 
   interface State {
     loading: boolean;
@@ -60,7 +59,6 @@ const { userId } = Astro.props;
       form.reset();
       state.error = '';
       state.loading = false;
-      await navigate('/', { history: 'replace' });
     }
 
     if (error || isInputError(error)) {

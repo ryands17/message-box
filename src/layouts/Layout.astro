@@ -20,13 +20,15 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline src="/scripts/htmx@2.0.0.min.js"></script>
     <ViewTransitions />
   </head>
   <body>
     <slot />
-  </body><style is:global>
-    html {
-      font-family: system-ui, sans-serif;
-    }
-  </style>
+    <style is:global>
+      html {
+        font-family: system-ui, sans-serif;
+      }
+    </style>
+  </body>
 </html>
