@@ -15,6 +15,7 @@ export const server = {
     }),
     handler: async ({ content, userId }) => {
       try {
+        // add a delay to check loading state
         await sleep();
         const data = await db
           .insert(message)

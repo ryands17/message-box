@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { userId } = Astro.props;
+const submitMessageResult = Astro.getActionResult(actions.submitMessage);
 ---
 
 <form id="send-message" method="post" class="flex flex-col gap-2 p-6">
@@ -22,8 +23,9 @@ const { userId } = Astro.props;
   <input type="hidden" name="userId" value={userId} />
   <Button id="submit-btn" type="submit">Send</Button>
 </form>
-<noscript id="send-message-error" class="px-6 pb-6 text-end text-red-600"
-></noscript>
+<div id="send-message-error" class="px-6 pb-10 text-end text-red-600 h-4">
+  {submitMessageResult?.error?.message}
+</div>
 
 <script>
   declare const htmx: any;
