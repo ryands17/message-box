@@ -23,12 +23,9 @@ importers:
       better-sqlite3:
         specifier: ^11.0.0
         version: 11.0.0
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       drizzle-orm:
         specifier: ^0.31.2
-        version: 0.31.2(@types/better-sqlite3@7.6.10)(@types/react@18.3.3)(better-sqlite3@11.0.0)(react@19.0.0-rc-3da26163a3-20240704)
+        version: 0.31.2(@types/better-sqlite3@7.6.10)(@types/react@18.3.3)(better-sqlite3@11.0.0)
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4
@@ -38,9 +35,6 @@ importers:
       ulid:
         specifier: ^2.3.0
         version: 2.3.0
-      valtio:
-        specifier: ^1.13.2
-        version: 1.13.2(@types/react@18.3.3)(react@19.0.0-rc-3da26163a3-20240704)
     devDependencies:
       '@types/better-sqlite3':
         specifier: ^7.6.10
@@ -1235,11 +1229,6 @@ packages:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
 
-  derive-valtio@0.1.0:
-    resolution: {integrity: sha512-OCg2UsLbXK7GmmpzMXhYkdO64vhJ1ROUUGaTFyHjVwEdMEcTTRj7W1TxLbSBxdY8QLBPCcp66MTyaSy0RpO17A==}
-    peerDependencies:
-      valtio: '*'
-
   destroy@1.2.0:
     resolution: {integrity: sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==}
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
@@ -2177,9 +2166,6 @@ packages:
   property-information@6.5.0:
     resolution: {integrity: sha512-PgTgs/BlvHxOu8QuEN7wi5A0OmXaBcHpmCSTehcs6Uuu9IkDIEo13Hy7n898RHfrQ49vKCoGeWZSaAK01nwVig==}
 
-  proxy-compare@2.6.0:
-    resolution: {integrity: sha512-8xuCeM3l8yqdmbPoYeLbrAXCBWu19XEYc5/F28f5qOaoAIMyfmBUkl5axiK+x9olUvRlcekvnm98AP9RDngOIw==}
-
   pump@3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==}
 
@@ -2193,10 +2179,6 @@ packages:
   rc@1.2.8:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
-
-  react@19.0.0-rc-3da26163a3-20240704:
-    resolution: {integrity: sha512-r+xGZWMoMzKW2xSVnHbLL+LejQTn33bx8/p84cfiYHrbQtw/KlUtp3XvW9DjefQsZhtODNvqI4MJ3yfzykyAZw==}
-    engines: {node: '>=0.10.0'}
 
   read-cache@1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
@@ -2538,25 +2520,8 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
-  use-sync-external-store@1.2.0:
-    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
-
-  valtio@1.13.2:
-    resolution: {integrity: sha512-Qik0o+DSy741TmkqmRfjq+0xpZBXi/Y6+fXZLn0xNF1z/waFMbE3rkivv5Zcf9RrMUp6zswf2J7sbh2KBlba5A==}
-    engines: {node: '>=12.20.0'}
-    peerDependencies:
-      '@types/react': '>=16.8'
-      react: '>=16.8'
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      react:
-        optional: true
 
   vfile-location@5.0.2:
     resolution: {integrity: sha512-NXPYyxyBSH7zB5U6+3uDdd6Nybz6o6/od9rk8bp9H8GR3L+cm/fC0uUTbqBmUTnMCUDslAGBOIKNfvvb+gGlDg==}
@@ -3870,10 +3835,6 @@ snapshots:
 
   dequal@2.0.3: {}
 
-  derive-valtio@0.1.0(valtio@1.13.2(@types/react@18.3.3)(react@19.0.0-rc-3da26163a3-20240704)):
-    dependencies:
-      valtio: 1.13.2(@types/react@18.3.3)(react@19.0.0-rc-3da26163a3-20240704)
-
   destroy@1.2.0: {}
 
   detect-libc@2.0.3: {}
@@ -3902,12 +3863,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.31.2(@types/better-sqlite3@7.6.10)(@types/react@18.3.3)(better-sqlite3@11.0.0)(react@19.0.0-rc-3da26163a3-20240704):
+  drizzle-orm@0.31.2(@types/better-sqlite3@7.6.10)(@types/react@18.3.3)(better-sqlite3@11.0.0):
     optionalDependencies:
       '@types/better-sqlite3': 7.6.10
       '@types/react': 18.3.3
       better-sqlite3: 11.0.0
-      react: 19.0.0-rc-3da26163a3-20240704
 
   dset@3.1.3: {}
 
@@ -4941,8 +4901,6 @@ snapshots:
 
   property-information@6.5.0: {}
 
-  proxy-compare@2.6.0: {}
-
   pump@3.0.0:
     dependencies:
       end-of-stream: 1.4.4
@@ -4958,8 +4916,6 @@ snapshots:
       ini: 1.3.8
       minimist: 1.2.8
       strip-json-comments: 2.0.1
-
-  react@19.0.0-rc-3da26163a3-20240704: {}
 
   read-cache@1.0.0:
     dependencies:
@@ -5430,20 +5386,7 @@ snapshots:
       escalade: 3.1.2
       picocolors: 1.0.1
 
-  use-sync-external-store@1.2.0(react@19.0.0-rc-3da26163a3-20240704):
-    dependencies:
-      react: 19.0.0-rc-3da26163a3-20240704
-
   util-deprecate@1.0.2: {}
-
-  valtio@1.13.2(@types/react@18.3.3)(react@19.0.0-rc-3da26163a3-20240704):
-    dependencies:
-      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@18.3.3)(react@19.0.0-rc-3da26163a3-20240704))
-      proxy-compare: 2.6.0
-      use-sync-external-store: 1.2.0(react@19.0.0-rc-3da26163a3-20240704)
-    optionalDependencies:
-      '@types/react': 18.3.3
-      react: 19.0.0-rc-3da26163a3-20240704
 
   vfile-location@5.0.2:
     dependencies:

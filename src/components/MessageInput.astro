@@ -26,64 +26,35 @@ const { userId } = Astro.props;
 ></noscript>
 
 <script>
-  import { proxy } from 'valtio/vanilla';
-  import { subscribeKey } from 'valtio/utils';
+  declare const htmx: any;
   import { actions, isInputError } from 'astro:actions';
 
-  interface State {
-    loading: boolean;
-    error: string | null;
-  }
-
-  const state = proxy<State>({
-    loading: false,
-    error: null,
-  });
+  const messageContainer = '#message-box';
+  const errorContainer = '#send-message-error';
 
   const form = document.querySelector<HTMLFormElement>('#send-message')!;
   const submitButton =
     document.querySelector<HTMLButtonElement>('#submit-btn')!;
-  const errorMessage = document.querySelector<HTMLElement>(
-    '#send-message-error'
-  )!;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    state.loading = true;
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
 
     const formValues = new FormData(form);
     const { data, error } = await actions.submitMessage.safe(formValues);
 
     if (data) {
-      console.log('called');
+      htmx.swap(messageContainer, data, { swapStyle: 'beforeend' });
+      htmx.swap(errorContainer, '', { swapStyle: 'innerHTML' });
       form.reset();
-      state.error = '';
-      state.loading = false;
     }
 
     if (error || isInputError(error)) {
-      state.error = error.message;
+      htmx.swap(errorContainer, error.message, { swapStyle: 'innerHTML' });
     }
 
-    state.loading = false;
-  });
-
-  // state changes
-  subscribeKey(state, 'loading', (loading) => {
-    if (loading) {
-      submitButton.textContent = 'Sending...';
-      submitButton.disabled = true;
-    } else {
-      submitButton.textContent = 'Send';
-      submitButton.disabled = false;
-    }
-  });
-
-  subscribeKey(state, 'error', (error) => {
-    if (error) {
-      errorMessage.innerText = error;
-    } else {
-      errorMessage.innerText = '';
-    }
+    submitButton.disabled = false;
+    submitButton.textContent = 'Send';
   });
 </script>
