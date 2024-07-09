@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'button'>;
+---
+
+<div data-scroller {...Astro.props}>
+  <slot />
+</div>
+
+<script>
+  let box = document.querySelector('div[data-scroller]')!;
+  box.scroll({ behavior: 'smooth', top: box.scrollHeight });
+
+  let mutationObserver = new MutationObserver(() => {
+    box.scroll({ behavior: 'smooth', top: box.scrollHeight });
+  });
+
+  mutationObserver.observe(box, { childList: true });
+</script>

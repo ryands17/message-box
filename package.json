@@ -3,31 +3,45 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "bun astro dev",
-    "start": "bun astro dev",
-    "build": "bun astro check && bun astro build",
-    "preview": "bun astro preview",
-    "astro": "bunx --bun astro",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "db:push": "drizzle-kit push",
-    "db:seed": "bun run src/db/seed.ts"
+    "db:seed": "tsx src/db/seed.ts",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
     "@astrojs/node": "^8.3.2",
+    "@astrojs/react": "^3.6.0",
     "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.11.3",
     "better-sqlite3": "^11.0.0",
+    "clsx": "^2.1.1",
     "drizzle-orm": "^0.31.2",
+    "react": "19.0.0-rc-3da26163a3-20240704",
+    "react-dom": "19.0.0-rc-3da26163a3-20240704",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.2",
-    "ulid": "^2.3.0"
+    "ulid": "^2.3.0",
+    "valtio": "^1.13.2"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.10",
     "drizzle-kit": "^0.22.7",
-    "prettier": "^3.3.2"
+    "prettier": "^3.3.2",
+    "tsx": "^4.15.7",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
   },
   "prettier": {
     "singleQuote": true
-  }
+  },
+  "packageManager": "pnpm@8.7.4+sha1.9dfcac89c4010a00ce092c3cda76dab72cd99198"
 }

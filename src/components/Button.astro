@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'button'>;
+---
+
+<button
+  class="w-fit self-end text-nowrap rounded bg-slate-500 px-3 py-1 text-white disabled:bg-gray-300"
+  {...Astro.props}
+>
+  <slot />
+</button>

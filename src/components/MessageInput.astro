@@ -1,0 +1,91 @@
+---
+import Button from './Button.astro';
+import { actions, getActionProps } from 'astro:actions';
+
+interface Props {
+  userId: string;
+}
+
+const { userId } = Astro.props;
+---
+
+<form id="send-message" method="post" class="flex flex-col gap-2 p-6">
+  <input {...getActionProps(actions.submitMessage)} />
+  <input
+    autocomplete="off"
+    required
+    minlength={1}
+    name="content"
+    class="italic outline-none"
+    placeholder="Type a message..."
+  />
+  <input type="hidden" name="userId" value={userId} />
+  <Button id="submit-btn" type="submit">Send</Button>
+</form>
+<noscript id="send-message-error" class="px-6 pb-6 text-end text-red-600"
+></noscript>
+
+<script>
+  import { proxy } from 'valtio/vanilla';
+  import { subscribeKey } from 'valtio/utils';
+  import { actions, isInputError } from 'astro:actions';
+  import { navigate } from 'astro:transitions/client';
+
+  interface State {
+    loading: boolean;
+    error: string | null;
+  }
+
+  const state = proxy<State>({
+    loading: false,
+    error: null,
+  });
+
+  const form = document.querySelector<HTMLFormElement>('#send-message')!;
+  const submitButton =
+    document.querySelector<HTMLButtonElement>('#submit-btn')!;
+  const errorMessage = document.querySelector<HTMLElement>(
+    '#send-message-error'
+  )!;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    state.loading = true;
+
+    const formValues = new FormData(form);
+    const { data, error } = await actions.submitMessage.safe(formValues);
+
+    if (data) {
+      console.log('called');
+      form.reset();
+      state.error = '';
+      state.loading = false;
+      await navigate('/', { history: 'replace' });
+    }
+
+    if (error || isInputError(error)) {
+      state.error = error.message;
+    }
+
+    state.loading = false;
+  });
+
+  // state changes
+  subscribeKey(state, 'loading', (loading) => {
+    if (loading) {
+      submitButton.textContent = 'Sending...';
+      submitButton.disabled = true;
+    } else {
+      submitButton.textContent = 'Send';
+      submitButton.disabled = false;
+    }
+  });
+
+  subscribeKey(state, 'error', (error) => {
+    if (error) {
+      errorMessage.innerText = error;
+    } else {
+      errorMessage.innerText = '';
+    }
+  });
+</script>
