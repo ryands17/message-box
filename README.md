@@ -1,4 +1,16 @@
-# Message box - Astro
+# Message box - Astro + HTMX
+
+## Prerequisites
+
+- Node LTS
+- PNPM
+
+## Initial setup
+
+- Clone this repo
+- Install the dependencies: `pnpm i`
+- Create the database: `pnpm db:push`
+- Seed the database: `pnpm db:seed`
 
 ## 🚀 Project Structure
 
@@ -34,6 +46,8 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm dev`                 | Starts local dev server at `localhost:4321`      |
 | `pnpm build`               | Build your production site to `./dist/`          |
 | `pnpm preview`             | Preview your build locally, before deploying     |
+| `pnpm db:push`             | Push the schema to the SQLite database           |
+| `pnpm db:seed`             | Seed the database with test data                 |
 | `pnpm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `pnpm run astro -- --help` | Get help using the Astro CLI                     |
 

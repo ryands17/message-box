@@ -24,7 +24,6 @@ export const server = {
           })
           .returning();
 
-        console.log({ data });
         const container = await experimental_AstroContainer.create();
         const result = await container.renderToString(MessageDisplay, {
           props: { message: data[0], userId },
