@@ -19,8 +19,7 @@ const isWrittenByUser = userId === message.createdBy;
   ]}
 >
   <span class="text-slate-700">
-    <span class="font-bold">{isWrittenByUser ? 'You' : 'Them'}</span>
-    {' - '}
+    <span class="font-bold">{isWrittenByUser ? 'You' : 'Them'}</span> -
     <span class="text-nowrap text-sm italic">
       {
         new Date(message.createdAt).toLocaleString('en-US', {

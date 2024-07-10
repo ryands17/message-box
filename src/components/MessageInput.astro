@@ -23,7 +23,7 @@ const submitMessageResult = Astro.getActionResult(actions.submitMessage);
   <input type="hidden" name="userId" value={userId} />
   <Button id="submit-btn" type="submit">Send</Button>
 </form>
-<div id="send-message-error" class="px-6 pb-10 text-end text-red-600 h-4">
+<div id="send-message-error" class="px-6 pb-6 text-end text-red-600 h-3">
   {submitMessageResult?.error?.message}
 </div>
 
