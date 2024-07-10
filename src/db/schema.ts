@@ -34,6 +34,14 @@ export const messageAuthor = relations(message, ({ one }) => ({
 }));
 
 const sqlite = new Database('sqlite.db');
+// performance tuning
+sqlite.pragma('journal_mode = WAL');
+sqlite.pragma('synchronous = NORMAL');
+sqlite.pragma('journal_size_limit = 67108864');
+sqlite.pragma('mmap_size = 134217728');
+sqlite.pragma('cache_size = 2000');
+sqlite.pragma('busy_timeout = 5000');
+
 export const db = drizzle(sqlite, {
   schema: { user, message, usersMessages, messageAuthor },
 });

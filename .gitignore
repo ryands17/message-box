@@ -21,7 +21,7 @@ pnpm-debug.log*
 .DS_Store
 
 # database
-sqlite.db
+sqlite.db*
 
 # jetbrains setting folder
 .idea/
