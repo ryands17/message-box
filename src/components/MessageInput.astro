@@ -10,7 +10,13 @@ const { userId } = Astro.props;
 const submitMessageResult = Astro.getActionResult(actions.submitMessage);
 ---
 
-<form id="send-message" method="post" class="flex flex-col gap-2 p-6">
+<form
+  id="send-message"
+  chat-data="chat"
+  method="post"
+  class="flex flex-col gap-2 p-6"
+  chat-on:submit.prevent="sendMessage"
+>
   <input {...getActionProps(actions.submitMessage)} />
   <input
     autocomplete="off"
@@ -21,41 +27,51 @@ const submitMessageResult = Astro.getActionResult(actions.submitMessage);
     placeholder="Type a message..."
   />
   <input type="hidden" name="userId" value={userId} />
-  <Button id="submit-btn" type="submit">Send</Button>
+  <Button
+    id="submit-btn"
+    type="submit"
+    chat-bind:disabled="isSubmitting"
+    chat-text="submitButtonText">Send</Button
+  >
 </form>
 <div id="send-message-error" class="px-6 pb-6 text-end text-red-600 h-3">
   {submitMessageResult?.error?.message}
 </div>
 
 <script>
+  import Alpine from 'alpinejs';
   import { actions, isInputError } from 'astro:actions';
 
   const messageContainer = '#message-box';
   const errorContainer = '#send-message-error';
 
-  const form = document.querySelector<HTMLFormElement>('#send-message')!;
-  const submitButton =
-    document.querySelector<HTMLButtonElement>('#submit-btn')!;
+  Alpine.prefix('chat-');
+  Alpine.data('chat', () => ({
+    isSubmitting: false,
+    submitButtonText: 'Send',
+    async sendMessage(e: Event) {
+      const form = e.currentTarget;
+      this.isSubmitting = true;
+      this.submitButtonText = 'Sending...';
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    submitButton.disabled = true;
-    submitButton.textContent = 'Sending...';
+      if (form instanceof HTMLFormElement) {
+        const formValues = new FormData(form);
+        const { data, error } = await actions.submitMessage.safe(formValues);
+        if (data) {
+          htmx.swap(messageContainer, data, { swapStyle: 'beforeend' });
+          htmx.swap(errorContainer, '', { swapStyle: 'innerHTML' });
+          form.reset();
+        }
 
-    const formValues = new FormData(form);
-    const { data, error } = await actions.submitMessage.safe(formValues);
+        if (error || isInputError(error)) {
+          htmx.swap(errorContainer, error.message, { swapStyle: 'innerHTML' });
+        }
+      }
 
-    if (data) {
-      htmx.swap(messageContainer, data, { swapStyle: 'beforeend' });
-      htmx.swap(errorContainer, '', { swapStyle: 'innerHTML' });
-      form.reset();
-    }
+      this.isSubmitting = false;
+      this.submitButtonText = 'Send';
+    },
+  }));
 
-    if (error || isInputError(error)) {
-      htmx.swap(errorContainer, error.message, { swapStyle: 'innerHTML' });
-    }
-
-    submitButton.disabled = false;
-    submitButton.textContent = 'Send';
-  });
+  Alpine.start();
 </script>
