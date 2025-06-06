@@ -1,6 +1,6 @@
 ---
 import Button from './Button.astro';
-import { actions, getActionProps } from 'astro:actions';
+import { actions } from 'astro:actions';
 
 interface Props {
   userId: string;
@@ -17,7 +17,6 @@ const submitMessageResult = Astro.getActionResult(actions.submitMessage);
   class="flex flex-col gap-2 p-6"
   chat-on:submit.prevent="sendMessage"
 >
-  <input {...getActionProps(actions.submitMessage)} />
   <input
     autocomplete="off"
     required
@@ -56,7 +55,8 @@ const submitMessageResult = Astro.getActionResult(actions.submitMessage);
 
       if (form instanceof HTMLFormElement) {
         const formValues = new FormData(form);
-        const { data, error } = await actions.submitMessage.safe(formValues);
+        const { data, error } = await actions.submitMessage(formValues);
+
         if (data) {
           htmx.swap(messageContainer, data, { swapStyle: 'beforeend' });
           htmx.swap(errorContainer, '', { swapStyle: 'innerHTML' });

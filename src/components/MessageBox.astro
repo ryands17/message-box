@@ -1,7 +1,7 @@
 ---
 import { db } from 'db/schema';
-import MessageDisplay from './MessageDisplay.astro';
 import AutomaticScroller from './AutomaticScroller.astro';
+import MessageDisplay from './MessageDisplay.astro';
 import MessageInput from './MessageInput.astro';
 
 const user = await db.query.user.findFirst();

@@ -1,7 +1,8 @@
 import { experimental_AstroContainer } from 'astro/container';
-import { defineAction, ActionError, z } from 'astro:actions';
-import { db, message } from 'db/schema';
+import { ActionError, defineAction } from 'astro:actions';
+import { z } from 'astro:schema';
 import MessageDisplay from 'components/MessageDisplay.astro';
+import { db, message } from 'db/schema';
 
 const sleep = (time = 1000) =>
   new Promise((resolve) => setTimeout(() => resolve(true), time));
@@ -31,7 +32,7 @@ export const server = {
         });
 
         return result;
-      } catch (error) {
+      } catch (_error) {
         throw new ActionError({
           message: `Couldn't send the message. Please try again.`,
           code: 'BAD_REQUEST',
